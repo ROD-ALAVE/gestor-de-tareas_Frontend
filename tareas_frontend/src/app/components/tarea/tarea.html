@@ -1,0 +1,9 @@
+<h1> Listado de Tareas</h1>
+@for (item of tareas; track $index) {
+    <h3>{{ item.titulo }}</h3>
+    <p>{{ item.descripcion }}</p>
+    <span>Prioridad: {{ item.prioridad }}</span>
+    <span>Categoría: {{ item.categoria }}</span>
+    <span>{{ item.completada ? '✅ Completada' : '⏳ Pendiente' }}</span>
+}
+|
