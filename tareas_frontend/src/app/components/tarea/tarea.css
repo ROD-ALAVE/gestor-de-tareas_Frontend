@@ -1,0 +1,55 @@
+/* .completada {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.sin-fecha {
+  color: #9e9e9e;
+  font-style: italic;
+}
+
+.sin-tareas {
+  color: #6c757d;
+}
+
+/* Prioridad */
+/*.prioridad-alta {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.prioridad-media {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.prioridad-baja {
+  background-color: #198754;
+  color: #fff;
+}*/
+
+/* Categoría */
+/*.categoria-estudio {
+  background-color: #6610f2;
+  color: #fff;
+}
+
+.categoria-deporte {
+  background-color: #fd7e14;
+  color: #fff;
+}
+
+.categoria-trabajo {
+  background-color: #0dcaf0;
+  color: #212529;
+}
+
+.categoria-personal {
+  background-color: #d63384;
+  color: #fff;
+}*/
+
+/* Footer separado visualmente */
+.footer-tareas {
+  border-top: 3px solid #dc3545;
+} 
