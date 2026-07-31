@@ -1,0 +1,38 @@
+<div class="titulo-container" style="padding: 50px">
+    <span class="badge-angular">Angular 21</span>
+    <h1 class="curso-titulo">Curso de Programación<br>Angular</h1>
+    <div class="subrayado"></div>
+  </div>
+
+  <div class="tabla-container" style="padding: 50px">
+  <table class="tabla-cursos">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Duración (hrs)</th>
+        <th>Nivel</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (curso of cursos; track curso.id) {
+        <tr>
+          <td>{{ curso.id }}</td>
+          <td>{{ curso.titulo }}</td>
+          <td>{{ curso.descripcion }}</td>
+          <td>{{ curso.duracionHoras }}</td>
+          <td>
+            <span class="badge" [ngClass]="'badge-' + curso.nivel">
+              {{ curso.nivel }}
+            </span>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" class="sin-datos">No hay cursos disponibles.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

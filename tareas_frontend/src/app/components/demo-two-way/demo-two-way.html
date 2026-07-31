@@ -1,0 +1,27 @@
+<mat-card class="demo-card">
+  <mat-card-header>
+    <mat-card-title>Two-Way Data Binding</mat-card-title>
+    <mat-card-subtitle>[(ngModel)] = "🍌📦"</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Input con two-way binding -->
+    <mat-form-field appearance="outline">
+      <mat-label>Escribe tu nombre</mat-label>
+      <input matInput [(ngModel)]="nombre" placeholder="Ej: Juan">
+    </mat-form-field>
+
+    <!-- El dato se actualiza automáticamente -->
+    <h2>¡Hola {{ nombre || 'invitado' }}! 👋</h2>
+
+    <!-- Botón que cambia el dato desde TypeScript -->
+    <button mat-raised-button color="primary" (click)="cambiarNombre()">
+      Cambiar a María
+    </button>
+
+    <!-- Mostrar el valor actual -->
+    <p><strong>Valor actual:</strong> "{{ nombre }}"</p>
+  </mat-card-content>
+</mat-card>
+<p>demo-two-way works!</p>
+
