@@ -75,9 +75,8 @@ export class Tarea {
 
   constructor(private fb: FormBuilder) {
     this.tareaForm = this.fb.group({
-      titulo: ['', [Validators.required, Validators.minLength(3)
-        ,
-    Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)
+      titulo: ['', [Validators.required, Validators.minLength(3),
+      Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)
       ]],
       descripcion: [''],
       categoria: ['personal'],
@@ -89,7 +88,7 @@ export class Tarea {
 
   abrirModal(tarea?: TareaModel) {
     this.tareaEditando = tarea || null;
-    
+
     if (tarea) {
       // Editar: cargar datos
       this.tareaForm.patchValue({
@@ -111,7 +110,7 @@ export class Tarea {
         completada: false
       });
     }
-    
+
     this.mostrarModal = true;
   }
 
@@ -126,8 +125,8 @@ export class Tarea {
 
     const tareaData: TareaModel = {
       ...this.tareaForm.value,
-      fecha_vencimiento: this.tareaForm.value.fecha_vencimiento 
-        ? this.formatDate(this.tareaForm.value.fecha_vencimiento) 
+      fecha_vencimiento: this.tareaForm.value.fecha_vencimiento
+        ? this.formatDate(this.tareaForm.value.fecha_vencimiento)
         : null
     };
 

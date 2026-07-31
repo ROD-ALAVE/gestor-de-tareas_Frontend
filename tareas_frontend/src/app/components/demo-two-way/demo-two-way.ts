@@ -17,10 +17,10 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class DemoTwoWay {
 
-  nombre: string = 'Juan';
+  nombre: string = 'Juan Perez';
 
   cambiarNombre() {
-    this.nombre = 'María';
+    this.nombre = 'María Rios';
   }
 }
 /**
