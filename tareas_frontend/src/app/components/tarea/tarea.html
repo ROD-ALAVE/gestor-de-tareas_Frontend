@@ -33,19 +33,25 @@
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Título *</mat-label>
                         <input matInput formControlName="titulo" placeholder="Ingresa el título">
-                        @if (tareaForm.get('titulo')?.hasError('required')) {
-                        <mat-error>El título es obligatorio</mat-error>
+                        @if (getTituloErrorMessage()) {
+                        <mat-error>{{ getTituloErrorMessage() }}</mat-error>
                         }
                     </mat-form-field>
 
                     <!-- Descripción -->
+                    <br>
+                    <br>
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Descripción</mat-label>
                         <textarea matInput formControlName="descripcion" rows="3"
                             placeholder="Descripción de la tarea"></textarea>
+                        @if (getDescripcionErrorMessage()) {
+                        <mat-error>{{ getDescripcionErrorMessage() }}</mat-error>
+                        }
                     </mat-form-field>
 
                     <!-- Categoría y Prioridad (2 columnas) -->
+                     <br><br>
                     <div class="row-fields">
                         <!-- Categoría -->
                         <mat-form-field appearance="outline" class="half-width">

@@ -72,13 +72,14 @@ export class Tarea {
   tareaForm: FormGroup;
   mostrarModal = false;
   tareaEditando: TareaModel | null = null;
+  submitted = false;
 
   constructor(private fb: FormBuilder) {
     this.tareaForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.minLength(3),
       Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)
       ]],
-      descripcion: [''],
+      descripcion: ['',Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)],
       categoria: ['personal'],
       prioridad: ['media'],
       fecha_vencimiento: [null],
@@ -88,6 +89,7 @@ export class Tarea {
 
   abrirModal(tarea?: TareaModel) {
     this.tareaEditando = tarea || null;
+    this.submitted = false;
 
     if (tarea) {
       // Editar: cargar datos
@@ -117,10 +119,13 @@ export class Tarea {
   cerrarModal() {
     this.mostrarModal = false;
     this.tareaEditando = null;
+    this.submitted = false;
     this.tareaForm.reset();
   }
 
   guardarTarea() {
+    this.submitted = true;
+
     if (this.tareaForm.invalid) return;
 
     const tareaData: TareaModel = {
@@ -142,6 +147,41 @@ export class Tarea {
     }
 
     this.cerrarModal();
+  }
+
+  getTituloErrorMessage(): string | null {
+    const control = this.tareaForm.get('titulo');
+
+    if (!control || !control.errors) {
+      return null;
+    }
+
+    if ((control.touched || control.dirty || this.submitted) && control.errors['required']) {
+      return 'El título es obligatorio.';
+    }
+
+    if ((control.touched || control.dirty || this.submitted) && control.errors['minlength']) {
+      return 'El título debe tener al menos 3 caracteres.';
+    }
+
+    if ((control.touched || control.dirty || this.submitted) && control.errors['pattern']) {
+      return 'El título solo puede contener letras y espacios.';
+    }
+
+    return null;
+  }
+  getDescripcionErrorMessage(): string | null {
+    const control = this.tareaForm.get('descripcion');
+
+    if (!control || !control.errors) {
+      return null;
+    }
+
+    if ((control.touched || control.dirty || this.submitted) && control.errors['pattern']) {
+      return 'La descripción solo puede contener letras y espacios.';
+    }
+
+    return null;
   }
 
   private formatDate(date: Date): string {
