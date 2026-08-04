@@ -106,70 +106,8 @@
         </mat-card>
     </div>
 
-    <!-- ========================================== -->
-    <!-- TÚ TABLA EXISTENTE (sin cambios)          -->
-    <!-- ========================================== -->
-
     <!-- ... tu tabla de tareas aquí ... -->
 
-    <!-- <h1> Listado de Tareas</h1> -->
-    <!-- @for (item of tareas; track $index) {
-        <h3>{{ item.titulo }}</h3>
-        <p>{{ item.descripcion }}</p>
-        <span>Prioridad: {{ item.prioridad }}</span>
-        <span>Categoría: {{ item.categoria }}</span>
-        <span>{{ item.completada ? '✅ Completada' : '⏳ Pendiente' }}</span>
-    } -->
-    <!-- <div class="tareas-container">
-        <table class="tabla-tareas">
-            <thead>
-                <tr>
-                    <th>Estado</th>
-                    <th>Título</th>
-                    <th>Descripción</th>
-                    <th>Categoría</th>
-                    <th>Prioridad</th>
-                    <th>Vencimiento</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (tarea of tareas; track tarea.id) {
-                <tr [class.completada]="tarea.completada">
-                    <td>
-                        <input type="checkbox" [checked]="tarea.completada" (change)="cambiarEstado(tarea)" />
-                    </td>
-                    <td>{{ tarea.titulo }}</td>
-                    <td class="descripcion">{{ tarea.descripcion }}</td>
-                    <td>
-                        <span class="badge categoria-{{ tarea.categoria }}">
-                            {{ tarea.categoria }}
-                        </span>
-                    </td>
-                    <td>
-                        <span class="badge prioridad-{{ tarea.prioridad }}">
-                            {{ tarea.prioridad }}
-                        </span>
-                    </td>
-                    <td>
-                        @if (tarea.fecha_vencimiento) {
-                        {{ tarea.fecha_vencimiento | date: 'dd/MM/yyyy' }}
-                        } @else {
-                        <span class="sin-fecha">Sin fecha</span>
-                        }
-                    </td>
-                    <td class="acciones">
-                        <button (click)="eliminarTarea(tarea)">🗑️</button>
-                    </td>
-                </tr>
-                } @empty {
-                <tr>
-                    <td colspan="7" class="sin-tareas">No hay tareas registradas.</td>
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div> -->
     <h1 class="mat-headline-4"> Listado de Tareas</h1>
     <h2 class="mat-headline-5">Con Angular Material</h2>
     <div class="tareas-container">
@@ -247,8 +185,15 @@
         </table>
     </div>
 
-    <!-- <h1>Lista de Tareas</h1>
-    <h2>Tabla hecha con bootstrap</h2>
+    <!-- Footer separado -->
+    <br><br>
+    <footer class="footer-tareas bg-dark text-light text-center py-3 mt-4">
+        <small>&copy; 2026 Gestor de Tareas — Todos los derechos reservados</small>
+    </footer>
+
+</div>
+
+    <!-- <h2>Tabla hecha con bootstrap</h2>
     <div class="container-fluid tareas-container py-4"> -->
 
         <!-- Tabla dentro de una card con sombra -->
@@ -312,10 +257,62 @@
 
     </div> -->
 
-    <!-- Footer separado -->
-    <br><br>
-    <footer class="footer-tareas bg-dark text-light text-center py-3 mt-4">
-        <small>&copy; 2026 Gestor de Tareas — Todos los derechos reservados</small>
-    </footer>
-
-</div>
+    <!-- <h1> Listado de Tareas</h1> -->
+    <!-- @for (item of tareas; track $index) {
+        <h3>{{ item.titulo }}</h3>
+        <p>{{ item.descripcion }}</p>
+        <span>Prioridad: {{ item.prioridad }}</span>
+        <span>Categoría: {{ item.categoria }}</span>
+        <span>{{ item.completada ? '✅ Completada' : '⏳ Pendiente' }}</span>
+    } -->
+    <!-- <div class="tareas-container">
+        <table class="tabla-tareas">
+            <thead>
+                <tr>
+                    <th>Estado</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Prioridad</th>
+                    <th>Vencimiento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (tarea of tareas; track tarea.id) {
+                <tr [class.completada]="tarea.completada">
+                    <td>
+                        <input type="checkbox" [checked]="tarea.completada" (change)="cambiarEstado(tarea)" />
+                    </td>
+                    <td>{{ tarea.titulo }}</td>
+                    <td class="descripcion">{{ tarea.descripcion }}</td>
+                    <td>
+                        <span class="badge categoria-{{ tarea.categoria }}">
+                            {{ tarea.categoria }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge prioridad-{{ tarea.prioridad }}">
+                            {{ tarea.prioridad }}
+                        </span>
+                    </td>
+                    <td>
+                        @if (tarea.fecha_vencimiento) {
+                        {{ tarea.fecha_vencimiento | date: 'dd/MM/yyyy' }}
+                        } @else {
+                        <span class="sin-fecha">Sin fecha</span>
+                        }
+                    </td>
+                    <td class="acciones">
+                        <button (click)="eliminarTarea(tarea)">🗑️</button>
+                    </td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="7" class="sin-tareas">No hay tareas registradas.</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div> -->
+    
