@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -35,7 +35,8 @@ import type { Tarea as TareaModel } from '../../../models/tarea.model';
   templateUrl: './reg-tarea.html',
   styleUrl: './reg-tarea.css',
 })
-export class RegTarea {
+export class RegTarea implements OnInit {
+  @Input() tareaEditar?: TareaModel | null = null;
   @Output() cerrar = new EventEmitter<void>();
   @Output() guardar = new EventEmitter<TareaModel>();
   tareaForm: FormGroup;
@@ -52,6 +53,19 @@ export class RegTarea {
       fecha_vencimiento: [null],
       completada: [false]
     });
+  }
+  ngOnInit(): void {
+    if (this.tareaEditar) {
+      // Cargar datos de la tarea en el formulario
+      this.tareaForm.patchValue({
+        titulo: this.tareaEditar.titulo,
+        descripcion: this.tareaEditar.descripcion,
+        categoria: this.tareaEditar.categoria,
+        prioridad: this.tareaEditar.prioridad,
+        fecha_vencimiento: this.tareaEditar.fecha_vencimiento ? new Date(this.tareaEditar.fecha_vencimiento) : null,
+        completada: this.tareaEditar.completada
+      });
+    }
   }
 
   cancelar() {
