@@ -1,0 +1,261 @@
+ /* ============================================ */
+    /* ESTILOS PARA EL MODAL EMERGENTE              */
+    /* ============================================ */
+    
+    /* Overlay - Fondo oscuro que cubre toda la pantalla */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        animation: fadeIn 0.3s ease-in;
+        backdrop-filter: blur(4px);
+    }
+
+    /* Tarjeta del modal */
+    .modal-card {
+        background: white;
+        border-radius: 16px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 20px 24px 16px 24px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        animation: slideUp 0.3s ease-out;
+        position: relative;
+    }
+
+    /* Encabezado del modal */
+    .modal-card mat-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 0 16px 0;
+        border-bottom: 2px solid #e0e0e0;
+        margin-bottom: 16px;
+    }
+
+    .modal-card mat-card-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin: 0;
+    }
+
+    .modal-card mat-card-title mat-icon {
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+    }
+
+    /* Botón cerrar */
+    .close-btn {
+        color: #666;
+        transition: all 0.2s;
+    }
+
+    .close-btn:hover {
+        color: #d32f2f;
+        transform: rotate(90deg);
+        background-color: rgba(211, 47, 47, 0.1);
+    }
+
+    /* Contenido del formulario */
+    .modal-card mat-card-content {
+        padding: 8px 0;
+    }
+
+    /* Campos de formulario */
+    .full-width {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+
+    .half-width {
+        width: 48%;
+    }
+
+    .row-fields {
+        display: flex;
+        gap: 4%;
+        justify-content: space-between;
+        margin: 8px 0;
+    }
+
+    /* Mat-form-field personalizado */
+    ::ng-deep .mat-mdc-form-field {
+        width: 100%;
+    }
+
+    ::ng-deep .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
+        background-color: #fafafa;
+    }
+
+    /* Botones de acción */
+    .modal-card mat-card-actions {
+        padding: 16px 0 0 0;
+        border-top: 2px solid #f0f0f0;
+        margin-top: 8px;
+        gap: 8px;
+    }
+
+    .modal-card mat-card-actions button {
+        min-width: 100px;
+        font-weight: 500;
+        border-radius: 8px;
+    }
+
+    .modal-card mat-card-actions button[color="primary"] {
+        background: linear-gradient(135deg, #3f51b5, #536dfe);
+        color: white;
+        transition: all 0.3s;
+    }
+
+    .modal-card mat-card-actions button[color="primary"]:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(63, 81, 181, 0.3);
+    }
+
+    .modal-card mat-card-actions button[color="primary"]:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    /* Scroll personalizado */
+    .modal-card::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .modal-card::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 8px;
+    }
+
+    .modal-card::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 8px;
+    }
+
+    .modal-card::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(40px) scale(0.95);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* ============================================ */
+    /* RESPONSIVE - Adaptación para móviles         */
+    /* ============================================ */
+    
+    @media (max-width: 768px) {
+        .modal-card {
+            max-width: 95%;
+            padding: 16px;
+            max-height: 95vh;
+        }
+
+        .modal-card mat-card-title {
+            font-size: 1.2rem;
+        }
+
+        .row-fields {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .half-width {
+            width: 100%;
+        }
+
+        .modal-card mat-card-actions {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .modal-card mat-card-actions button {
+            width: 100%;
+        }
+
+        .modal-card mat-card-actions align-end {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .modal-card {
+            padding: 12px;
+            max-width: 98%;
+        }
+
+        .modal-card mat-card-title {
+            font-size: 1rem;
+        }
+
+        .modal-card mat-card-header {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+    }
+
+    /* ============================================ */
+    /* ESTILOS ADICIONALES PARA MEJORAR UX          */
+    /* ============================================ */
+    
+    /* Efecto de foco en campos */
+    ::ng-deep .mat-mdc-form-field-focused .mat-mdc-form-field-outline {
+        transition: all 0.3s;
+    }
+
+    /* Mejora en selects y datepicker */
+    ::ng-deep .mat-mdc-select-panel {
+        border-radius: 12px !important;
+    }
+
+    ::ng-deep .mat-calendar {
+        border-radius: 12px !important;
+    }
+
+    /* Mensajes de error */
+    ::ng-deep .mat-mdc-form-field-error {
+        font-size: 12px;
+        margin-top: 2px;
+    }
+
+    /* Mejora en slide-toggle (si se usa) */
+    ::ng-deep .mat-mdc-slide-toggle {
+        margin: 12px 0;
+    }
+
+    /* Sombra y hover mejorados */
+    .modal-card:hover {
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+        transition: box-shadow 0.3s;
+    }

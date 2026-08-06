@@ -1,84 +1,91 @@
 <p>reg-tarea works!</p>
-<!-- *ngIf="mostrarModal"  -->
-<div class="modal-overlay" (click)="cancelar()">
-    <mat-card class="modal-card" (click)="$event.stopPropagation()">
+<!-- @if(mostrarModal)  -->
+@if (true) {
+<!-- @if (mostrarModal) { -->
+    <div class="modal-overlay" (click)="cancelar()">
+        <mat-card class="modal-card" (click)="$event.stopPropagation()">
 
-        <!-- Header -->
-        <mat-card-header>
-            <mat-card-title>
-                <mat-icon color="primary">task</mat-icon>
-                {{ 'Nueva Tarea' }}
-            </mat-card-title>
-            <button mat-icon-button class="close-btn" (click)="cancelar()">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-card-header>
-
-        <!-- Formulario -->
-        <form [formGroup]="tareaForm" (ngSubmit)="guardarTarea()">
-            <mat-card-content>
-
-                <!-- Título -->
-                <mat-form-field appearance="outline" class="full-width">
-                    <mat-label>Título *</mat-label>
-                    <input matInput formControlName="titulo" placeholder="Ingresa el título">
-                    <mat-error *ngIf="getTituloErrorMessage()">{{ getTituloErrorMessage() }}</mat-error>
-                </mat-form-field>
-
-                <!-- Descripción -->
-                <br>
-                <br>
-                <mat-form-field appearance="outline" class="full-width">
-                    <mat-label>Descripción</mat-label>
-                    <textarea matInput formControlName="descripcion" rows="3"
-                        placeholder="Descripción de la tarea"></textarea>
-                    <mat-error *ngIf="getDescripcionErrorMessage()">{{ getDescripcionErrorMessage() }}</mat-error>
-                </mat-form-field>
-
-                <!-- Categoría y Prioridad (2 columnas) -->
-                <br><br>
-                <div class="row-fields">
-                    <!-- Categoría -->
-                    <mat-form-field appearance="outline" class="half-width">
-                        <mat-label>Categoría</mat-label>
-                        <mat-select formControlName="categoria">
-                            <mat-option value="estudio">📚 Estudio</mat-option>
-                            <mat-option value="deporte">🏃 Deporte</mat-option>
-                            <mat-option value="trabajo">💼 Trabajo</mat-option>
-                            <mat-option value="personal">👤 Personal</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <!-- Prioridad -->
-                    <mat-form-field appearance="outline" class="half-width">
-                        <mat-label>Prioridad</mat-label>
-                        <mat-select formControlName="prioridad">
-                            <mat-option value="baja">🟢 Baja</mat-option>
-                            <mat-option value="media">🟡 Media</mat-option>
-                            <mat-option value="alta">🔴 Alta</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <!-- Fecha de vencimiento -->
-                <mat-form-field appearance="outline" class="full-width">
-                    <mat-label>Fecha de vencimiento</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="fecha_vencimiento">
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-
-            </mat-card-content>
-
-            <!-- Footer con acciones -->
-            <mat-card-actions align="end">
-                <button mat-button type="button" (click)="cancelar()">Cancelar</button>
-                <button mat-raised-button color="primary" type="submit" [disabled]="tareaForm.invalid">
-                    <mat-icon>save</mat-icon>
-                    {{ 'Crear' }}
+            <!-- Header -->
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon color="primary">task</mat-icon>
+                    {{ 'Nueva Tarea' }}
+                </mat-card-title>
+                <button mat-icon-button class="close-btn" (click)="cancelar()">
+                    <mat-icon>close</mat-icon>
                 </button>
-            </mat-card-actions>
-        </form>
+            </mat-card-header>
 
-    </mat-card>
-</div>
+            <!-- Formulario -->
+            <form [formGroup]="tareaForm" (ngSubmit)="guardarTarea()">
+                <mat-card-content>
+
+                    <!-- Título -->
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Título *</mat-label>
+                        <input matInput formControlName="titulo" placeholder="Ingresa el título">
+                        @if (getTituloErrorMessage()) {
+                            <mat-error>{{ getTituloErrorMessage() }}</mat-error>
+                        }
+                    </mat-form-field>
+
+                    <!-- Descripción -->
+                    <br>
+                    <br>
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Descripción</mat-label>
+                        <textarea matInput formControlName="descripcion" rows="3"
+                            placeholder="Descripción de la tarea"></textarea>
+                        @if (getDescripcionErrorMessage()) {
+                            <mat-error>{{ getDescripcionErrorMessage() }}</mat-error>
+                        }
+                    </mat-form-field>
+
+                    <!-- Categoría y Prioridad (2 columnas) -->
+                    <br><br>
+                    <div class="row-fields">
+                        <!-- Categoría -->
+                        <mat-form-field appearance="outline" class="half-width">
+                            <mat-label>Categoría</mat-label>
+                            <mat-select formControlName="categoria">
+                                <mat-option value="estudio">📚 Estudio</mat-option>
+                                <mat-option value="deporte">🏃 Deporte</mat-option>
+                                <mat-option value="trabajo">💼 Trabajo</mat-option>
+                                <mat-option value="personal">👤 Personal</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <!-- Prioridad -->
+                        <mat-form-field appearance="outline" class="half-width">
+                            <mat-label>Prioridad</mat-label>
+                            <mat-select formControlName="prioridad">
+                                <mat-option value="baja">🟢 Baja</mat-option>
+                                <mat-option value="media">🟡 Media</mat-option>
+                                <mat-option value="alta">🔴 Alta</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Fecha de vencimiento -->
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Fecha de vencimiento</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="fecha_vencimiento">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                </mat-card-content>
+
+                <!-- Footer con acciones -->
+                <mat-card-actions align="end">
+                    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="tareaForm.invalid">
+                        <mat-icon>save</mat-icon>
+                        {{ 'Crear' }}
+                    </button>
+                </mat-card-actions>
+            </form>
+
+        </mat-card>
+    </div>
+}

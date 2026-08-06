@@ -34,9 +34,6 @@ export class TareaService {
     //   tap(nueva => this._tareas.update(tareas => [...tareas, nueva]))
     // );
   }
-  // createTask(task: any): Observable<any> {
-  //   return this.http.post(this.API_URL, task);
-  // }
 
   // PUT: actualizar una tarea existente
   updateTarea(id: number, tarea: Partial<Tarea>): Observable<Tarea> {
