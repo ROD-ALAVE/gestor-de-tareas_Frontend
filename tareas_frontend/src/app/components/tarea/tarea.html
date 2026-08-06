@@ -7,11 +7,8 @@
         Registrar Tarea
     </button>
     @if (signalreg()) {
-        <app-reg-tarea 
-            [tareaEditar]="tareaEditando"
-            (cerrar)="cerrarComp()" 
-            (guardar)="onGuardarTarea($event)">
-        </app-reg-tarea>
+    <app-reg-tarea [tareaEditar]="tareaEditando" (cerrar)="cerrarComp()" (guardar)="onGuardarTarea($event)">
+    </app-reg-tarea>
     }
 
     <!-- ... tabla de tareas aquí ... -->
@@ -65,9 +62,9 @@
                 <th mat-header-cell *matHeaderCellDef>Vencimiento</th>
                 <td mat-cell *matCellDef="let tarea">
                     @if (tarea.fecha_vencimiento) {
-                        {{ tarea.fecha_vencimiento | date: 'dd/MM/yyyy' }}
+                    {{ tarea.fecha_vencimiento | date: 'dd/MM/yyyy' }}
                     } @else {
-                        <span class="sin-fecha">Sin fecha</span>
+                    <span class="sin-fecha">Sin fecha</span>
                     }
                 </td>
             </ng-container>
@@ -90,13 +87,11 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-            @if (tareas().length === 0) {
-                <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell sin-tareas" [attr.colspan]="displayedColumns.length">
-                        No hay tareas registradas.
-                    </td>
-                </tr>
-            }
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell sin-tareas" [attr.colspan]="displayedColumns.length">
+                    No hay tareas registradas.
+                </td>
+            </tr>
         </table>
     </div>
 
