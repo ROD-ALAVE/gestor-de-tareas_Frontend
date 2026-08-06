@@ -9,11 +9,9 @@
         <mat-icon>add</mat-icon>
         Nueva Tarea
     </button>
-
     <!-- Modal (Dialog) -->
-    <div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+    <div *ngIf="mostrarModal" class="modal-overlay" (click)="cerrarModal()">
         <mat-card class="modal-card" (click)="$event.stopPropagation()">
-
             <!-- Header -->
             <mat-card-header>
                 <mat-card-title>
@@ -33,9 +31,7 @@
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Título *</mat-label>
                         <input matInput formControlName="titulo" placeholder="Ingresa el título">
-                        @if (getTituloErrorMessage()) {
-                        <mat-error>{{ getTituloErrorMessage() }}</mat-error>
-                        }
+                    <mat-error *ngIf="getTituloErrorMessage()">{{ getTituloErrorMessage() }}</mat-error>
                     </mat-form-field>
 
                     <!-- Descripción -->
@@ -45,13 +41,10 @@
                         <mat-label>Descripción</mat-label>
                         <textarea matInput formControlName="descripcion" rows="3"
                             placeholder="Descripción de la tarea"></textarea>
-                        @if (getDescripcionErrorMessage()) {
-                        <mat-error>{{ getDescripcionErrorMessage() }}</mat-error>
-                        }
+                        <mat-error *ngIf="getDescripcionErrorMessage()">{{ getDescripcionErrorMessage() }}</mat-error>
                     </mat-form-field>
-
                     <!-- Categoría y Prioridad (2 columnas) -->
-                     <br><br>
+                    <br><br>
                     <div class="row-fields">
                         <!-- Categoría -->
                         <mat-form-field appearance="outline" class="half-width">
@@ -84,11 +77,9 @@
                     </mat-form-field>
 
                     <!-- Estado (solo para edición) -->
-                    @if (tareaEditando) {
-                    <mat-slide-toggle formControlName="completada" color="primary">
+                    <mat-slide-toggle *ngIf="tareaEditando" formControlName="completada" color="primary">
                         {{ tareaForm.get('completada')?.value ? '✅ Completada' : '⏳ Pendiente' }}
                     </mat-slide-toggle>
-                    }
 
                 </mat-card-content>
 
@@ -106,12 +97,20 @@
         </mat-card>
     </div>
 
-    <!-- ... tu tabla de tareas aquí ... -->
+
+
+    <!-- llamada a componente: reg-tareas -->
+    <br><br>
+    <button type="button" (click)="abirComp()">Registrar Tarea</button>
+    <app-reg-tarea *ngIf="signalreg()" (cerrar)="cerrarComp()" (guardar)="onGuardarTarea($event)">
+    </app-reg-tarea>
+
+    <!-- ... tabla de tareas aquí ... -->
 
     <h1 class="mat-headline-4"> Listado de Tareas</h1>
     <h2 class="mat-headline-5">Con Angular Material</h2>
     <div class="tareas-container">
-        <table mat-table [dataSource]="tareas" class="mat-elevation-z2 tabla-tareas">
+        <table mat-table [dataSource]="tareas()" class="mat-elevation-z2 tabla-tareas">
 
             <!-- Estado -->
             <ng-container matColumnDef="estado">
@@ -156,11 +155,12 @@
             <ng-container matColumnDef="vencimiento">
                 <th mat-header-cell *matHeaderCellDef>Vencimiento</th>
                 <td mat-cell *matCellDef="let tarea">
-                    @if (tarea.fecha_vencimiento) {
-                    {{ tarea.fecha_vencimiento | date: 'dd/MM/yyyy' }}
-                    } @else {
-                    <span class="sin-fecha">Sin fecha</span>
-                    }
+                    <ng-container *ngIf="tarea.fecha_vencimiento; else sinFecha">
+                        {{ tarea.fecha_vencimiento | date: 'dd/MM/yyyy' }}
+                    </ng-container>
+                    <ng-template #sinFecha>
+                        <span class="sin-fecha">Sin fecha</span>
+                    </ng-template>
                 </td>
             </ng-container>
 
@@ -193,11 +193,11 @@
 
 </div>
 
-    <!-- <h2>Tabla hecha con bootstrap</h2>
+<!-- <h2>Tabla hecha con bootstrap</h2>
     <div class="container-fluid tareas-container py-4"> -->
 
-        <!-- Tabla dentro de una card con sombra -->
-        <!-- <div class="card border-0 shadow rounded-3">
+<!-- Tabla dentro de una card con sombra -->
+<!-- <div class="card border-0 shadow rounded-3">
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0 tabla-tareas">
@@ -232,11 +232,12 @@
                                     </span>
                                 </td>
                                 <td class="d-none d-lg-table-cell">
-                                    @if (tarea.fecha_vencimiento) {
-                                    {{ tarea.fecha_vencimiento | date: 'dd/MM/yyyy' }}
-                                    } @else {
-                                    <span class="sin-fecha">Sin fecha</span>
-                                    }
+                                    <ng-container *ngIf="tarea.fecha_vencimiento; else sinFecha">
+                                        {{ tarea.fecha_vencimiento | date: 'dd/MM/yyyy' }}
+                                    </ng-container>
+                                    <ng-template #sinFecha>
+                                        <span class="sin-fecha">Sin fecha</span>
+                                    </ng-template>
                                 </td>
                                 <td class="text-end">
                                     <button class="btn btn-sm btn-danger rounded-circle" (click)="eliminarTarea(tarea)">
@@ -257,15 +258,15 @@
 
     </div> -->
 
-    <!-- <h1> Listado de Tareas</h1> -->
-    <!-- @for (item of tareas; track $index) {
+<!-- <h1> Listado de Tareas</h1> -->
+<!-- @for (item of tareas; track $index) {
         <h3>{{ item.titulo }}</h3>
         <p>{{ item.descripcion }}</p>
         <span>Prioridad: {{ item.prioridad }}</span>
         <span>Categoría: {{ item.categoria }}</span>
         <span>{{ item.completada ? '✅ Completada' : '⏳ Pendiente' }}</span>
     } -->
-    <!-- <div class="tareas-container">
+<!-- <div class="tareas-container">
         <table class="tabla-tareas">
             <thead>
                 <tr>
@@ -315,4 +316,3 @@
             </tbody>
         </table>
     </div> -->
-    
