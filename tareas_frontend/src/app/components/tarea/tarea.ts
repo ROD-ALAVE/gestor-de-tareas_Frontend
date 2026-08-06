@@ -80,28 +80,49 @@ export class Tarea implements OnInit {
 
   abrirComp() {
     this.signalreg.set(!this.signalreg());
+    this.tareaEditando = null
   }
 
   cerrarComp() {
     this.signalreg.set(false);
+    this.tareaEditando = null
   }
 
   onGuardarTarea(tarea: TareaModel): void {
     this.cargando.set(true);
     this.error.set(null);
 
-    this.tareaService.createTarea(tarea).subscribe({
-      next: () => {
-        this.cargando.set(false);
-        this.cargarTareas(); // Recargar para actualizar la lista
-        this.cerrarComp();
-      },
-      error: (err) => {
-        this.cargando.set(false);
-        console.error('Error creando tarea', err);
-        this.error.set('No se pudo crear la tarea');
-      }
-    });
+    if (tarea.id) {
+      // Es edición - usar updateTarea()
+      this.tareaService.updateTarea(tarea.id, tarea).subscribe({
+        next: () => {
+          this.cargando.set(false);
+          this.cargarTareas();
+          this.cerrarComp();
+          this.tareaEditando = null;
+        },
+        error: (err) => {
+          this.cargando.set(false);
+          console.error('Error actualizando tarea', err);
+          this.error.set('No se pudo actualizar la tarea');
+        }
+      });
+    } else {
+      // Es nueva - usar createTarea()
+      this.tareaService.createTarea(tarea).subscribe({
+        next: () => {
+          this.cargando.set(false);
+          this.cargarTareas();
+          this.cerrarComp();
+          this.tareaEditando = null;
+        },
+        error: (err) => {
+          this.cargando.set(false);
+          console.error('Error creando tarea', err);
+          this.error.set('No se pudo crear la tarea');
+        }
+      });
+    }
   }
 
   editarTarea(tarea: TareaModel): void {

@@ -71,6 +71,9 @@ export class RegTarea implements OnInit {
   cancelar() {
     this.cerrar.emit();
   }
+  get esEdicion(): boolean {
+    return !!this.tareaEditar;
+  }
 
   guardarTarea() {
     this.submitted = true;
@@ -78,14 +81,23 @@ export class RegTarea implements OnInit {
     if (this.tareaForm.invalid) return;
 
     const tareaData: TareaModel = {
-      ...this.tareaForm.value,
+      titulo: this.tareaForm.value.titulo,
+      descripcion: this.tareaForm.value.descripcion,
+      categoria: this.tareaForm.value.categoria,
+      prioridad: this.tareaForm.value.prioridad,
+      completada: this.tareaForm.value.completada || false,
       fecha_vencimiento: this.tareaForm.value.fecha_vencimiento
         ? this.formatDate(this.tareaForm.value.fecha_vencimiento)
         : null
     };
-    console.log('Crear:', tareaData);
+
+    // Si es edición, agregar el id
+    if (this.tareaEditar) {
+      tareaData.id = this.tareaEditar.id;
+    }
+
     this.guardar.emit(tareaData);
-    this.cancelar();
+    this.cerrar.emit();
   }
 
   getTituloErrorMessage(): string | null {

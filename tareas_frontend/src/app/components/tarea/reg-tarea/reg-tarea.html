@@ -9,7 +9,8 @@
             <mat-card-header>
                 <mat-card-title>
                     <mat-icon color="primary">task</mat-icon>
-                    {{ 'Nueva Tarea' }}
+                    <!-- {{ 'Nueva Tarea' }} -->
+                    {{ esEdicion ? 'Editar Tarea' : 'Nueva Tarea' }}
                 </mat-card-title>
                 <button mat-icon-button class="close-btn" (click)="cancelar()">
                     <mat-icon>close</mat-icon>
@@ -81,7 +82,8 @@
                     <button mat-button type="button" (click)="cancelar()">Cancelar</button>
                     <button mat-raised-button color="primary" type="submit" [disabled]="tareaForm.invalid">
                         <mat-icon>save</mat-icon>
-                        {{ 'Crear' }}
+                        <!-- {{ 'Crear' }} -->
+                        {{ esEdicion ? 'Actualizar' : 'Guardar' }}
                     </button>
                 </mat-card-actions>
             </form>
